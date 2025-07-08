@@ -3,6 +3,7 @@
 💸 **Just $0.10 per 1,000 Emails – MailWish SMTP is a Game Changer!** 🚀📩
 
 ![Screenshot](screenshot.png)
+![Screenshot2](screenshot2.png)
 
 ## Description
 
