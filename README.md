@@ -31,7 +31,7 @@ Why pay more when you can send more for less?
 
 ### Method 2: FTP Upload
 1. Extract the plugin files
-2. Upload the `mailwish-smtp-wordpress` folder to `/wp-content/plugins/`
+2. Upload the `wp-mailwish` folder to `/wp-content/plugins/` or install the `wp-mailwish.zip` file via the admin dashboard in WordPress "Plugins".
 3. Activate the plugin through the **Plugins** menu in WordPress
 
 ## Configuration
