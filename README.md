@@ -1,7 +1,7 @@
 # MailWish SMTP
 MailWish is an Email Service Provider (ESP). At our core, we focus on delivering high-quality business email hosting solutions that are both reliable and cost-effective. Our goal is to offer you the best and most affordable business email service available. Powered by CloudWish.com and operated under the registered company name CloudWish LLC.
 
-💸 **Just $0.10 per 1,000 Emails – MailWish SMTP is a Game Changer!** 🚀📩 Signup here [https://mailwish.com](https://mailwish.com)
+💸 **Just $0.10 per 1,000 Emails – MailWish SMTP is a Game Changer!** 🚀📩 Signup here [https://mailwish.com](https://mailwish.com/smtp-security-delivery/).
 
 ![Screenshot](screenshot.png)
 ![Screenshot2](screenshot2.png)
@@ -43,7 +43,7 @@ Why pay more when you can send more for less?
 ### Step 1: Get Your MailWish SMTP Credentials
 
 🌐 **Purchase MailWish SMTP Service:**
-- Visit [https://mailwish.com](https://mailwish.com)
+- Visit [https://mailwish.com](https://mailwish.com/smtp-security-delivery/)
 - Sign up for an account
 - Purchase SMTP credits (starting at just $0.10 per 1,000 emails!)
 - Get your SMTP username and password from your MailWish dashboard
