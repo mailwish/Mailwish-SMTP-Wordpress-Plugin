@@ -480,3 +480,231 @@
 .card:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
+/* Provider Selector - Clean Modern Style */
+.provider-selector-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.provider-selector-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #495057;
+    transition: all 0.15s ease-in-out;
+    min-width: 180px;
+}
+
+.provider-selector-btn:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.provider-selector-btn .provider-icon {
+    font-size: 16px;
+}
+
+.provider-selector-btn .provider-name {
+    flex: 1;
+    text-align: left;
+}
+
+.provider-selector-btn .provider-arrow {
+    color: #6c757d;
+    font-size: 12px;
+}
+
+/* Provider Popup - Clean Modal */
+.provider-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.provider-popup-content {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-width: 500px;
+    width: 90%;
+    max-height: 70vh;
+    overflow: hidden;
+}
+
+.provider-popup-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.provider-popup-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.provider-popup-close {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.provider-popup-close:hover {
+    color: #495057;
+}
+
+.provider-popup-body {
+    padding: 15px;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+/* Provider Options - Clean List */
+.provider-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    background: #fff;
+}
+
+.provider-option:hover {
+    border-color: #667eea;
+    background: #f8f9fa;
+}
+
+.provider-option:last-child {
+    margin-bottom: 0;
+}
+
+.provider-option .provider-icon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.provider-info {
+    flex: 1;
+}
+
+.provider-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 2px;
+}
+
+.provider-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+}
+
+.provider-badge-recommended {
+    background: #ff6b6b;
+    color: white;
+}
+
+.provider-badge-popular {
+    background: #4ecdc4;
+    color: white;
+}
+
+.provider-badge-free {
+    background: #a8e6cf;
+    color: #2d5a27;
+}
+
+.provider-badge-enterprise {
+    background: #667eea;
+    color: white;
+}
+
+.provider-badge-aws {
+    background: #ff9a56;
+    color: white;
+}
+
+.provider-badge-reliable {
+    background: #74b9ff;
+    color: white;
+}
+
+.provider-badge-developer {
+    background: #fd79a8;
+    color: white;
+}
+
+.provider-badge-fast {
+    background: #fdcb6e;
+    color: white;
+}
+
+.provider-badge-analytics {
+    background: #a29bfe;
+    color: white;
+}
+
+.provider-badge-custom {
+    background: #636e72;
+    color: white;
+}
+
+.provider-description {
+    font-size: 12px;
+    color: #6c757d;
+    line-height: 1.3;
+}
+
+.provider-signup {
+    font-size: 11px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.provider-signup:hover {
+    text-decoration: underline;
+}

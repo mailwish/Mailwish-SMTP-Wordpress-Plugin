@@ -1,12 +1,13 @@
 <?php
 /**
- * Plugin Name: MailWish SMTP for WordPress
- * Plugin URI: https://mailwish.com
+ * Plugin Name: MailWish SMTP
+ * Plugin URI: https://mailwish.com/smtp-security-delivery/
  * Description: Configure WordPress to send emails via MailWish SMTP service. Just $0.10 per 1,000 emails - blazing-fast delivery with inbox-focused performance.
  * Version: 1.0.0
  * Author: MailWish
  * Author URI: https://mailwish.com
- * License: GPL v2 or later
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: mailwish-smtp
  * Domain Path: /languages
  */
@@ -49,7 +50,7 @@ class MailWishSMTP {
     
     public function enqueue_admin_scripts($hook) {
         // Only load on our settings page
-        if ($hook !== 'settings_page_mailwish-smtp') {
+        if ($hook !== 'toplevel_page_mailwish-smtp') {
             return;
         }
         
@@ -62,23 +63,33 @@ class MailWishSMTP {
     }
     
     public function add_admin_menu() {
-        add_options_page(
+        add_menu_page(
             __('MailWish SMTP Settings', 'mailwish-smtp'),
             __('MailWish SMTP', 'mailwish-smtp'),
             'manage_options',
             'mailwish-smtp',
-            array($this, 'options_page')
+            array($this, 'options_page'),
+            'dashicons-email-alt',
+            30
         );
     }
     
     public function settings_init() {
-        register_setting('mailwish_smtp', 'mailwish_smtp_options');
+        register_setting('mailwish_smtp', 'mailwish_smtp_options', array($this, 'sanitize_options'));
         
         add_settings_section(
             'mailwish_smtp_section',
             __('SMTP Configuration', 'mailwish-smtp'),
             array($this, 'settings_section_callback'),
             'mailwish_smtp'
+        );
+        
+        add_settings_field(
+            'email_provider',
+            __('Email Provider', 'mailwish-smtp'),
+            array($this, 'email_provider_render'),
+            'mailwish_smtp',
+            'mailwish_smtp_section'
         );
         
         add_settings_field(
@@ -138,10 +149,109 @@ class MailWishSMTP {
         );
     }
     
+    public function get_email_providers() {
+        return array(
+            'mailwish' => array(
+                'name' => 'MailWish',
+                'icon' => '🚀',
+                'badge' => 'Recommended - Cheapest $0.10/1000 emails',
+                'badge_class' => 'recommended',
+                'host' => 'smtp.mailwish.com',
+                'port' => 587,
+                'security' => 'tls',
+                'username_label' => 'Username',
+                'password_label' => 'Password',
+                'description' => 'Blazing-fast SMTP with inbox-focused delivery',
+                'signup_url' => 'https://mailwish.com'
+            ),
+            'gmail' => array(
+                'name' => 'Gmail',
+                'icon' => '📧',
+                'badge' => 'Popular',
+                'badge_class' => 'popular',
+                'host' => 'smtp.gmail.com',
+                'port' => 587,
+                'security' => 'tls',
+                'username_label' => 'Email Address',
+                'password_label' => 'App Password',
+                'description' => 'Use Gmail SMTP with App Password (2FA required)',
+                'signup_url' => 'https://accounts.google.com'
+            ),
+            'sendinblue' => array(
+                'name' => 'Brevo (SendinBlue)',
+                'icon' => '💙',
+                'badge' => 'Free Tier',
+                'badge_class' => 'free',
+                'host' => 'smtp-relay.brevo.com',
+                'port' => 587,
+                'security' => 'tls',
+                'username_label' => 'Email Address',
+                'password_label' => 'SMTP Key',
+                'description' => '300 emails/day free, then paid plans',
+                'signup_url' => 'https://www.brevo.com'
+            ),
+            'sendgrid' => array(
+                'name' => 'SendGrid',
+                'icon' => '📬',
+                'badge' => 'Reliable',
+                'badge_class' => 'reliable',
+                'host' => 'smtp.sendgrid.net',
+                'port' => 587,
+                'security' => 'tls',
+                'username_label' => 'Username',
+                'password_label' => 'API Key',
+                'description' => 'Trusted by developers worldwide',
+                'signup_url' => 'https://sendgrid.com'
+            ),
+            'amazonses' => array(
+                'name' => 'Amazon SES',
+                'icon' => '📦',
+                'badge' => 'AWS',
+                'badge_class' => 'aws',
+                'host' => 'email-smtp.us-east-1.amazonaws.com',
+                'port' => 587,
+                'security' => 'tls',
+                'username_label' => 'SMTP Username',
+                'password_label' => 'SMTP Password',
+                'description' => 'Scalable email service from Amazon Web Services',
+                'signup_url' => 'https://aws.amazon.com/ses/'
+            ),
+            'custom' => array(
+                'name' => 'Custom SMTP',
+                'icon' => '⚙️',
+                'badge' => 'Custom',
+                'badge_class' => 'custom',
+                'host' => '',
+                'port' => 587,
+                'security' => 'tls',
+                'username_label' => 'Username',
+                'password_label' => 'Password',
+                'description' => 'Configure your own SMTP server',
+                'signup_url' => ''
+            )
+        );
+    }
+    
+    public function email_provider_render() {
+        $current_provider = isset($this->options['email_provider']) ? $this->options['email_provider'] : 'mailwish';
+        $providers = $this->get_email_providers();
+        
+        echo '<div class="provider-selector-container">';
+        echo '<input type="hidden" name="mailwish_smtp_options[email_provider]" id="selected_provider" value="' . esc_attr($current_provider) . '" />';
+        echo '<button type="button" class="provider-selector-btn" id="provider-selector-btn">';
+        echo '<span class="provider-icon">' . $providers[$current_provider]['icon'] . '</span>';
+        echo '<span class="provider-name">' . esc_html($providers[$current_provider]['name']) . '</span>';
+        echo '<span class="provider-arrow">▼</span>';
+        echo '</button>';
+        echo '<span style="margin-left: 10px; font-size: 12px; color: #667eea; font-weight: 500;">Click to switch provider</span>';
+        echo '</div>';
+        echo '<p class="description">' . __('Choose your email service provider for quick configuration', 'mailwish-smtp') . '</p>';
+    }
+    
     public function smtp_host_render() {
         $value = isset($this->options['smtp_host']) ? $this->options['smtp_host'] : 'smtp.mailwish.com';
-        echo '<input type="text" name="mailwish_smtp_options[smtp_host]" value="' . esc_attr($value) . '" class="regular-text" />';
-        echo '<p class="description">' . __('Default: smtp.mailwish.com', 'mailwish-smtp') . '</p>';
+        echo '<input type="text" name="mailwish_smtp_options[smtp_host]" id="smtp_host" value="' . esc_attr($value) . '" class="regular-text" />';
+        echo '<p class="description">' . __('SMTP server hostname', 'mailwish-smtp') . '</p>';
     }
     
     public function smtp_port_render() {
@@ -167,9 +277,13 @@ class MailWishSMTP {
     }
     
     public function smtp_password_render() {
-        $value = isset($this->options['smtp_password']) ? $this->options['smtp_password'] : '';
-        echo '<input type="password" name="mailwish_smtp_options[smtp_password]" value="' . esc_attr($value) . '" class="regular-text" placeholder="••••••••" />';
-        echo '<p class="description">' . __('Your MailWish SMTP password', 'mailwish-smtp') . '</p>';
+        $has_password = !empty($this->options['smtp_password']);
+        echo '<input type="password" name="mailwish_smtp_options[smtp_password]" value="" class="regular-text" placeholder="' . ($has_password ? __('Password is set - enter new password to change', 'mailwish-smtp') : __('Enter your password', 'mailwish-smtp')) . '" />';
+        if ($has_password) {
+            echo '<p class="description" style="color: #28a745; font-weight: 600;">✅ ' . __('Password is securely stored and encrypted', 'mailwish-smtp') . '</p>';
+        } else {
+            echo '<p class="description">' . __('Your MailWish SMTP password', 'mailwish-smtp') . '</p>';
+        }
     }
     
     public function from_email_render() {
@@ -323,6 +437,83 @@ class MailWishSMTP {
                 </ul>
                 <p><a href="https://mailwish.com" target="_blank" class="button button-primary"><?php _e('Learn More & Sign Up', 'mailwish-smtp'); ?></a></p>
             </div>
+            
+            <!-- Provider Selector Popup -->
+            <div id="provider-popup" class="provider-popup" style="display: none;">
+                <div class="provider-popup-content">
+                    <div class="provider-popup-header">
+                        <h3><?php _e('Choose Email Provider', 'mailwish-smtp'); ?></h3>
+                        <button type="button" class="provider-popup-close" id="provider-popup-close">×</button>
+                    </div>
+                    <div class="provider-popup-body">
+                        <?php
+                        $providers = $this->get_email_providers();
+                        foreach ($providers as $key => $provider) {
+                            echo '<div class="provider-option" data-provider="' . esc_attr($key) . '">';
+                            echo '<div class="provider-icon">' . $provider['icon'] . '</div>';
+                            echo '<div class="provider-info">';
+                            echo '<div class="provider-name">' . esc_html($provider['name']) . '</div>';
+                            echo '<div class="provider-badge provider-badge-' . esc_attr($provider['badge_class']) . '">' . esc_html($provider['badge']) . '</div>';
+                            echo '<div class="provider-description">' . esc_html($provider['description']) . '</div>';
+                            if (!empty($provider['signup_url'])) {
+                                echo '<a href="' . esc_url($provider['signup_url']) . '" target="_blank" class="provider-signup">Sign Up →</a>';
+                            }
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+            jQuery(document).ready(function($) {
+                var providers = <?php echo json_encode($this->get_email_providers()); ?>;
+                
+                // Provider selector button click
+                $('#provider-selector-btn').on('click', function(e) {
+                    e.preventDefault();
+                    $('#provider-popup').show();
+                });
+                
+                // Close popup
+                $('#provider-popup-close, #provider-popup').on('click', function(e) {
+                    if (e.target === this) {
+                        $('#provider-popup').hide();
+                    }
+                });
+                
+                // Provider selection
+                $('.provider-option').on('click', function() {
+                    var providerId = $(this).data('provider');
+                    var provider = providers[providerId];
+                    
+                    // Update hidden field
+                    $('#selected_provider').val(providerId);
+                    
+                    // Update button display
+                    $('#provider-selector-btn .provider-icon').text(provider.icon);
+                    $('#provider-selector-btn .provider-name').text(provider.name);
+                    
+                    // Update form fields
+                    $('#smtp_host').val(provider.host);
+                    $('input[name="mailwish_smtp_options[smtp_port]"]').val(provider.port);
+                    $('select[name="mailwish_smtp_options[smtp_security]"]').val(provider.security);
+                    
+                    // Close popup
+                    $('#provider-popup').hide();
+                    
+                    // Show success message
+                    var message = '<div class="alert alert-info" style="margin-top: 15px;"><div class="alert-content"><span class="alert-icon">ℹ️</span><strong>Provider Updated:</strong> Form fields configured for ' + provider.name + '. Please enter your credentials and save.</div></div>';
+                    $('.smtp-config-card .card-body form').before(message);
+                    
+                    // Remove message after 5 seconds
+                    setTimeout(function() {
+                        $('.alert-info').fadeOut();
+                    }, 5000);
+                });
+            });
+            </script>
         </div>
         <?php
     }
@@ -358,7 +549,7 @@ class MailWishSMTP {
         $phpmailer->Port = isset($this->options['smtp_port']) ? intval($this->options['smtp_port']) : 587;
         $phpmailer->SMTPAuth = true;
         $phpmailer->Username = $this->options['smtp_username'];
-        $phpmailer->Password = $this->options['smtp_password'];
+        $phpmailer->Password = $this->get_decrypted_password();
         
         // Set security
         $security = isset($this->options['smtp_security']) ? $this->options['smtp_security'] : 'tls';
@@ -390,7 +581,7 @@ class MailWishSMTP {
     public function admin_notices() {
         // Only show on our settings page
         $screen = get_current_screen();
-        if ($screen->id !== 'settings_page_mailwish-smtp') {
+        if ($screen->id !== 'toplevel_page_mailwish-smtp') {
             return;
         }
         
@@ -532,7 +723,7 @@ class MailWishSMTP {
             $mail->Port = isset($this->options['smtp_port']) ? intval($this->options['smtp_port']) : 587;
             $mail->SMTPAuth = true;
             $mail->Username = $this->options['smtp_username'];
-            $mail->Password = $this->options['smtp_password'];
+            $mail->Password = $this->get_decrypted_password();
             
             // Set security
             $security = isset($this->options['smtp_security']) ? $this->options['smtp_security'] : 'tls';
@@ -570,8 +761,84 @@ class MailWishSMTP {
         }
     }
     
+    public function sanitize_options($input) {
+        $sanitized = array();
+        
+        // Sanitize all fields
+        $sanitized['email_provider'] = sanitize_text_field($input['email_provider']);
+        $sanitized['smtp_host'] = sanitize_text_field($input['smtp_host']);
+        $sanitized['smtp_port'] = intval($input['smtp_port']);
+        $sanitized['smtp_security'] = sanitize_text_field($input['smtp_security']);
+        $sanitized['smtp_username'] = sanitize_text_field($input['smtp_username']);
+        $sanitized['from_email'] = sanitize_email($input['from_email']);
+        $sanitized['from_name'] = sanitize_text_field($input['from_name']);
+        
+        // Handle password encryption
+        if (!empty($input['smtp_password'])) {
+            // New password provided, encrypt it
+            $sanitized['smtp_password'] = $this->encrypt_password($input['smtp_password']);
+        } else {
+            // No new password, keep existing encrypted password
+            $existing_options = get_option('mailwish_smtp_options', array());
+            $sanitized['smtp_password'] = isset($existing_options['smtp_password']) ? $existing_options['smtp_password'] : '';
+        }
+        
+        return $sanitized;
+    }
+    
+    private function encrypt_password($password) {
+        if (empty($password)) {
+            return '';
+        }
+        
+        // Use WordPress salts for encryption key
+        $key = wp_salt('auth') . wp_salt('secure_auth');
+        $key = hash('sha256', $key);
+        
+        // Generate a random IV
+        $iv = openssl_random_pseudo_bytes(16);
+        
+        // Encrypt the password
+        $encrypted = openssl_encrypt($password, 'AES-256-CBC', $key, 0, $iv);
+        
+        // Combine IV and encrypted data
+        return base64_encode($iv . $encrypted);
+    }
+    
+    private function decrypt_password($encrypted_password) {
+        if (empty($encrypted_password)) {
+            return '';
+        }
+        
+        try {
+            // Use WordPress salts for encryption key
+            $key = wp_salt('auth') . wp_salt('secure_auth');
+            $key = hash('sha256', $key);
+            
+            // Decode the encrypted data
+            $data = base64_decode($encrypted_password);
+            
+            // Extract IV and encrypted password
+            $iv = substr($data, 0, 16);
+            $encrypted = substr($data, 16);
+            
+            // Decrypt the password
+            return openssl_decrypt($encrypted, 'AES-256-CBC', $key, 0, $iv);
+        } catch (Exception $e) {
+            return '';
+        }
+    }
+    
+    private function get_decrypted_password() {
+        if (empty($this->options['smtp_password'])) {
+            return '';
+        }
+        
+        return $this->decrypt_password($this->options['smtp_password']);
+    }
+    
     public function add_settings_link($links) {
-        $settings_link = '<a href="' . admin_url('options-general.php?page=mailwish-smtp') . '">' . __('Settings', 'mailwish-smtp') . '</a>';
+        $settings_link = '<a href="' . admin_url('admin.php?page=mailwish-smtp') . '">' . __('Settings', 'mailwish-smtp') . '</a>';
         array_unshift($links, $settings_link);
         return $links;
     }

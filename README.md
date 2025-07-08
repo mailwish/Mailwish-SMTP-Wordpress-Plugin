@@ -1,4 +1,4 @@
-# MailWish SMTP for WordPress
+# MailWish SMTP
 
 💸 **Just $0.10 per 1,000 Emails – MailWish SMTP is a Game Changer!** 🚀📩
 
@@ -184,7 +184,7 @@ For SMTP service and account issues:
 
 ## License
 
-This plugin is licensed under the GPL v2 or later.
+This plugin is licensed under the GPLv2 or later.
 
 ## Changelog
 
