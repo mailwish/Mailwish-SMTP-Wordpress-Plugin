@@ -1,6 +1,7 @@
 # MailWish SMTP
+MailWish is an Email Service Provider (ESP). At our core, we focus on delivering high-quality business email hosting solutions that are both reliable and cost-effective. Our goal is to offer you the best and most affordable business email service available. Powered by CloudWish.com and operated under the registered company name CloudWish LLC.
 
-💸 **Just $0.10 per 1,000 Emails – MailWish SMTP is a Game Changer!** 🚀📩
+💸 **Just $0.10 per 1,000 Emails – MailWish SMTP is a Game Changer!** 🚀📩 Signup here [https://mailwish.com](https://mailwish.com)
 
 ![Screenshot](screenshot.png)
 ![Screenshot2](screenshot2.png)
