@@ -1,0 +1,60 @@
+MailWish SMTP for WordPress - Installation Guide
+===============================================
+
+Quick Installation Steps:
+------------------------
+
+1. DOWNLOAD & INSTALL
+   - Download the plugin ZIP file
+   - Go to WordPress Admin > Plugins > Add New
+   - Click "Upload Plugin" and select the ZIP file
+   - Click "Install Now" then "Activate Plugin"
+
+2. GET MAILWISH SMTP CREDENTIALS
+   - Visit: https://mailwish.com
+   - Sign up for an account
+   - Purchase SMTP credits (just $0.10 per 1,000 emails!)
+   - Get your SMTP username and password
+
+3. CONFIGURE PLUGIN
+   - Go to Settings > MailWish SMTP in WordPress admin
+   - Enter your credentials:
+     * SMTP Host: smtp.mailwish.com (pre-filled)
+     * SMTP Port: 587 (pre-filled)
+     * Security: TLS (pre-filled)
+     * Username: [Your MailWish username]
+     * Password: [Your MailWish password]
+     * From Email: [Your verified email]
+     * From Name: [Your preferred name]
+   - Click "Save Changes"
+
+4. TEST CONFIGURATION
+   - Scroll down to "Test Email" section
+   - Enter a test email address
+   - Click "Send Test Email"
+   - Check if email was delivered
+
+That's it! Your WordPress site will now send emails via MailWish SMTP.
+
+Troubleshooting:
+---------------
+- If emails don't send, check your hosting provider allows SMTP
+- Try alternative ports: 465 (SSL), 25, or 2525
+- Verify your MailWish account has credits
+- Enable WordPress debug mode for detailed error logs
+
+Support:
+--------
+- Plugin issues: Check README.md file
+- MailWish service: https://mailwish.com
+- WordPress compatibility: WordPress 4.6+ required
+
+Why MailWish?
+------------
+✅ Just $0.10 per 1,000 emails
+✅ No monthly minimums
+✅ Blazing-fast delivery
+✅ Inbox-focused performance
+✅ Perfect for all email types
+
+Get started: https://mailwish.com

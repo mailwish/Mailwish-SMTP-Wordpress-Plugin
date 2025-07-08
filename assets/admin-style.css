@@ -1,0 +1,482 @@
+/* MailWish SMTP Admin Styles - Bootstrap-like Design */
+
+.mailwish-smtp-admin {
+    max-width: 1200px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Hide other plugin notices on our page */
+.mailwish-smtp-admin .notice:not(.mailwish-notice):not(.mailwish-conflict-notice):not(.test-email-result) {
+    display: none !important;
+}
+
+/* Bootstrap-like Alert System */
+.alert {
+    padding: 15px 20px;
+    margin: 20px 0;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.alert-content {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.alert-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+/* Bootstrap-like Cards */
+.card {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* SMTP Status Badge */
+.smtp-status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid;
+}
+
+.smtp-status-badge.status-success {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.smtp-status-badge.status-error {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+.smtp-status-badge.status-warning {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.status-icon {
+    font-size: 16px;
+}
+
+/* Bootstrap-like Form Controls */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #667eea;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+/* Bootstrap-like Buttons */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid transparent;
+    padding: 10px 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #5a6fd8;
+    border-color: #4c63d2;
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+.btn-lg {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+/* Plugin Header */
+.mailwish-smtp-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.mailwish-smtp-header h1 {
+    margin: 0 0 10px 0;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.mailwish-smtp-header p {
+    margin: 0;
+    font-size: 18px;
+    opacity: 0.95;
+}
+
+/* MailWish Promo Banner */
+.mailwish-promo-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.promo-content {
+    padding: 25px;
+    text-align: center;
+    color: white;
+}
+
+.promo-content h3 {
+    margin: 0 0 15px 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.promo-content p {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+.promo-button {
+    background: #ff6b6b;
+    border: 2px solid #ff5252;
+    color: white !important;
+    font-weight: 700;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.promo-button:hover {
+    background: #ff5252;
+    border-color: #ff4444;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.5);
+    color: white !important;
+    text-decoration: none;
+}
+
+/* WordPress Form Table Overrides */
+.mailwish-smtp-admin .form-table {
+    background: transparent;
+}
+
+.mailwish-smtp-admin .form-table th {
+    font-weight: 600;
+    color: #495057;
+    padding: 15px 10px 15px 0;
+    font-size: 14px;
+}
+
+.mailwish-smtp-admin .form-table td {
+    padding: 15px 10px;
+}
+
+.mailwish-smtp-admin .form-table td input[type="text"],
+.mailwish-smtp-admin .form-table td input[type="email"],
+.mailwish-smtp-admin .form-table td input[type="password"],
+.mailwish-smtp-admin .form-table td input[type="number"],
+.mailwish-smtp-admin .form-table td select,
+.mailwish-smtp-admin .form-table td textarea {
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 14px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: #fff;
+}
+
+.mailwish-smtp-admin .form-table td input:focus,
+.mailwish-smtp-admin .form-table td select:focus,
+.mailwish-smtp-admin .form-table td textarea:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+    outline: none;
+}
+
+.mailwish-smtp-admin .description {
+    color: #6c757d;
+    font-size: 13px;
+    margin-top: 5px;
+    font-style: normal;
+}
+
+/* WordPress Button Overrides */
+.mailwish-smtp-admin .button-primary {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.15s ease-in-out;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.mailwish-smtp-admin .button-primary:hover {
+    background: #5a6fd8;
+    border-color: #4c63d2;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Conflict Notice */
+.mailwish-conflict-notice {
+    border-left-color: #ffc107 !important;
+    background: #fff3cd !important;
+    border-radius: 8px !important;
+    padding: 15px 20px !important;
+    color: #856404 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mailwish-smtp-admin {
+        padding: 0 10px;
+    }
+    
+    .mailwish-smtp-header {
+        padding: 20px;
+    }
+    
+    .mailwish-smtp-header h1 {
+        font-size: 24px;
+    }
+    
+    .promo-content {
+        padding: 20px;
+    }
+    
+    .promo-content h3 {
+        font-size: 20px;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .smtp-status-badge {
+        align-self: flex-start;
+    }
+    
+    .form-control {
+        max-width: 100%;
+    }
+}
+
+/* Loading Animation */
+.mailwish-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success and Error States */
+.mailwish-smtp-admin .notice-success {
+    border-left-color: #28a745;
+    background: #d4edda;
+    border-radius: 6px;
+    color: #155724;
+}
+
+.mailwish-smtp-admin .notice-error {
+    border-left-color: #dc3545;
+    background: #f8d7da;
+    border-radius: 6px;
+    color: #721c24;
+}
+
+/* Enhanced Visual Hierarchy */
+.card h2 {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.card ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 14px;
+    color: #495057;
+}
+
+.card ul li:last-child {
+    border-bottom: none;
+}
+
+/* Focus States */
+.btn:focus,
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+}
+
+/* Hover Effects */
+.card {
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
